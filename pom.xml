@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.zzz</groupId>
+    <artifactId>maven-base</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <name>maven-base</name>
+    <description>maven-base</description>
+
+    <build>
+        <pluginManagement>
+            <!-- @formatter:off -->
+            <plugins>
+                <plugin><groupId>com.amashchenko.maven.plugin</groupId><artifactId>gitflow-maven-plugin</artifactId><version>${gitflow-maven-plugin.version}</version></plugin>
+                <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>${maven-compiler-plugin.version}</version></plugin>
+            </plugins>
+            <!-- @formatter:on -->
+        </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>com.amashchenko.maven.plugin</groupId>
+                <artifactId>gitflow-maven-plugin</artifactId>
+                <configuration>
+                    <tychoBuild>false</tychoBuild>
+
+                    <installProject>false</installProject>
+                    <verbose>false</verbose>
+
+                    <gitFlowConfig>
+                        <productionBranch>master</productionBranch>
+                        <developmentBranch>develop</developmentBranch>
+                        <featureBranchPrefix>feature/</featureBranchPrefix>
+                        <releaseBranchPrefix>release/</releaseBranchPrefix>
+                        <hotfixBranchPrefix>hotfix/</hotfixBranchPrefix>
+                        <supportBranchPrefix>support/</supportBranchPrefix>
+                        <versionTagPrefix>v</versionTagPrefix>
+                    </gitFlowConfig>
+
+                    <commitMessages>
+                        <featureStartMessage>updating versions for feature branch</featureStartMessage>
+                        <featureFinishMessage>updating versions for development branch</featureFinishMessage>
+
+                        <hotfixStartMessage>updating versions for hotfix</hotfixStartMessage>
+                        <hotfixFinishMessage>updating for next development version</hotfixFinishMessage>
+
+                        <releaseStartMessage>updating versions for release</releaseStartMessage>
+                        <releaseFinishMessage>updating for next development version</releaseFinishMessage>
+
+                        <tagHotfixMessage>tagging hotfix</tagHotfixMessage>
+                        <tagReleaseMessage>tagging release</tagReleaseMessage>
+                    </commitMessages>
+                </configuration>
+            </plugin>
+            <plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+				</configuration>
+			</plugin>
+        </plugins>
+    </build>
+
+    <distributionManagement>
+        <repository>
+            <id>releases</id>
+            <name>releases</name>
+            <url>${repository.release.url}</url>
+        </repository>
+        <snapshotRepository>
+            <id>snapshots</id>
+            <name>snapshots</name>
+            <url>${repository.snapshot.url}</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <!-- @formatter:off -->
+    <dependencyManagement>
+    </dependencyManagement>
+    <!-- @formatter:on -->
+
+    <properties>
+        <java.version>1.8</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
+        <maven.compiler.showDeprecation>true</maven.compiler.showDeprecation>
+        <maven.compiler.showWarnings>true</maven.compiler.showWarnings>
+        <maven.javadoc.failsOnError>false</maven.javadoc.failsOnError>
+        <maven.javadoc.skip>false</maven.javadoc.skip>
+        <maven.source.skip>false</maven.source.skip>
+
+        <gitflow-maven-plugin.version>1.9.0</gitflow-maven-plugin.version>
+        <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
+
+        <repository.release.url>http://localhost:8081/repository/maven-releases/</repository.release.url>
+        <repository.snapshot.url>http://localhost:8081/repository/maven-snapshots/</repository.snapshot.url>
+    </properties>
+
+</project>

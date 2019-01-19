@@ -99,8 +99,8 @@
         <gitflow-maven-plugin.version>1.9.0</gitflow-maven-plugin.version>
         <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
 
-        <repository.release.url>http://localhost:8081/repository/maven-releases/</repository.release.url>
-        <repository.snapshot.url>http://localhost:8081/repository/maven-snapshots/</repository.snapshot.url>
+        <repository.release.url>http://192.168.199.122:8081/repository/maven-releases/</repository.release.url>
+        <repository.snapshot.url>http://192.168.199.122:8081/repository/maven-snapshots/</repository.snapshot.url>
     </properties>
 
 </project>

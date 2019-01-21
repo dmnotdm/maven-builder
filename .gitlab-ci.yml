@@ -30,5 +30,6 @@ deploy:
   stage: deploy
   except:
     - master
+    - /^v\d+\.\d+(\.\d+)?(-\S*)?/
   script:
     - mvn -B -e deploy -Dmaven.test.skip=true

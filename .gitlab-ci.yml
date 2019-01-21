@@ -1,26 +1,34 @@
 stages:
-  - init
-  - test
-  - build
+#  - init
+#  - test
+#  - build
   - deploy
 
-init:
-  stage: init
-  script:
-    - export
-    - echo 'hello runner~'
-
-test:
-  stage: test
-  script:
-    - mvn -B -e clean test
-
-build:
-  stage: build
-  script:
-    - mvn -B -e install -Dmaven.test.skip=true
+#init:
+#  stage: init
+#  except:
+#    - master
+#  script:
+#    - export
+#    - echo 'hello runner~'
+#
+#test:
+#  stage: test
+#  except:
+#    - master
+#  script:
+#    - mvn -B -e test
+#
+#build:
+#  stage: build
+#  except:
+#    - master
+#  script:
+#    - mvn -B -e install -Dmaven.test.skip=true
 
 deploy:
   stage: deploy
+  except:
+    - master
   script:
     - mvn -B -e deploy -Dmaven.test.skip=true

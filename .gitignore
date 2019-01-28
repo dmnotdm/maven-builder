@@ -1,6 +1,4 @@
-.gradle
 /build/
-!gradle/wrapper/gradle-wrapper.jar
 
 ### STS ###
 .apt_generated
@@ -25,7 +23,6 @@ build/
 nbbuild/
 dist/
 nbdist/
-.nb-gradle/
 
 ### Projects ###
 target
@@ -43,9 +40,6 @@ git.properties
 
 ### gitlab-ci ###
 /artifacts.tar.gz
-
-### This module ###
-/guardian-spider-service/Dockerfile
 
 # Ignoring Versioned Files
 # git update-index --assume-unchanged <file>

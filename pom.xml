@@ -4,12 +4,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.zzz</groupId>
-    <artifactId>maven-base</artifactId>
-    <version>0.0.4-SNAPSHOT</version>
+    <artifactId>maven-builder</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>maven-base</name>
-    <description>maven-base</description>
+    <name>maven-builder</name>
+    <description>maven-builder</description>
 
     <build>
         <pluginManagement>

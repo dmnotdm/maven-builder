@@ -11,6 +11,29 @@
     <name>maven-builder</name>
     <description>maven-builder</description>
 
+    <properties>
+        <java.version>1.8</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.build.javaDocEncoding>UTF-8</project.build.javaDocEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
+        <maven.compiler.showDeprecation>true</maven.compiler.showDeprecation>
+        <maven.compiler.showWarnings>true</maven.compiler.showWarnings>
+        <maven.javadoc.failsOnError>false</maven.javadoc.failsOnError>
+        <maven.javadoc.skip>false</maven.javadoc.skip>
+        <maven.source.skip>false</maven.source.skip>
+
+        <gitflow-maven-plugin.version>1.9.0</gitflow-maven-plugin.version>
+        <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
+        <maven-javadoc-plugin.version>2.10.4</maven-javadoc-plugin.version>
+        <maven-source-plugin.version>3.0.1</maven-source-plugin.version>
+        <git-commit-id-plugin.version>2.2.4</git-commit-id-plugin.version>
+
+        <repository.release.url>http://host.ip:8081/repository/maven-releases/</repository.release.url>
+        <repository.snapshot.url>http://host.ip:8081/repository/maven-snapshots/</repository.snapshot.url>
+    </properties>
+
     <build>
         <pluginManagement>
             <!-- @formatter:off -->
@@ -19,6 +42,7 @@
                 <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>${maven-compiler-plugin.version}</version></plugin>
                 <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-javadoc-plugin</artifactId><version>${maven-javadoc-plugin.version}</version></plugin>
                 <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-source-plugin</artifactId><version>${maven-source-plugin.version}</version></plugin>
+                <plugin><groupId>pl.project13.maven</groupId><artifactId>git-commit-id-plugin</artifactId><version>${git-commit-id-plugin.version}</version></plugin>
             </plugins>
             <!-- @formatter:on -->
         </pluginManagement>
@@ -125,27 +149,5 @@
     <dependencyManagement>
     </dependencyManagement>
     <!-- @formatter:on -->
-
-    <properties>
-        <java.version>1.8</java.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.build.javaDocEncoding>UTF-8</project.build.javaDocEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-
-        <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
-        <maven.compiler.showDeprecation>true</maven.compiler.showDeprecation>
-        <maven.compiler.showWarnings>true</maven.compiler.showWarnings>
-        <maven.javadoc.failsOnError>false</maven.javadoc.failsOnError>
-        <maven.javadoc.skip>false</maven.javadoc.skip>
-        <maven.source.skip>false</maven.source.skip>
-
-        <gitflow-maven-plugin.version>1.9.0</gitflow-maven-plugin.version>
-        <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
-        <maven-javadoc-plugin.version>2.10.4</maven-javadoc-plugin.version>
-        <maven-source-plugin.version>3.0.1</maven-source-plugin.version>
-
-        <repository.release.url>http://host.ip:8081/repository/maven-releases/</repository.release.url>
-        <repository.snapshot.url>http://host.ip:8081/repository/maven-snapshots/</repository.snapshot.url>
-    </properties>
 
 </project>

@@ -23,12 +23,13 @@
         <maven.javadoc.failsOnError>false</maven.javadoc.failsOnError>
         <maven.javadoc.skip>false</maven.javadoc.skip>
         <maven.source.skip>false</maven.source.skip>
+        <git-commit-id.skip>false</git-commit-id.skip>
 
         <gitflow-maven-plugin.version>1.9.0</gitflow-maven-plugin.version>
         <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
         <maven-javadoc-plugin.version>2.10.4</maven-javadoc-plugin.version>
         <maven-source-plugin.version>3.0.1</maven-source-plugin.version>
-        <git-commit-id-plugin.version>2.2.4</git-commit-id-plugin.version>
+        <git-commit-id-plugin.version>2.2.6</git-commit-id-plugin.version>
 
         <repository.release.url>http://host.ip:8081/repository/maven-releases/</repository.release.url>
         <repository.snapshot.url>http://host.ip:8081/repository/maven-snapshots/</repository.snapshot.url>
@@ -42,7 +43,32 @@
                 <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>${maven-compiler-plugin.version}</version></plugin>
                 <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-javadoc-plugin</artifactId><version>${maven-javadoc-plugin.version}</version></plugin>
                 <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-source-plugin</artifactId><version>${maven-source-plugin.version}</version></plugin>
-                <plugin><groupId>pl.project13.maven</groupId><artifactId>git-commit-id-plugin</artifactId><version>${git-commit-id-plugin.version}</version></plugin>
+                <plugin>
+                    <groupId>pl.project13.maven</groupId>
+                    <artifactId>git-commit-id-plugin</artifactId>
+                    <version>${git-commit-id-plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <id>get-the-git-infos</id>
+                            <phase>initialize</phase>
+                            <goals><goal>revision</goal></goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <commitIdGenerationMode>flat</commitIdGenerationMode>
+                        <dotGitDirectory>${maven.multiModuleProjectDirectory}/.git</dotGitDirectory>
+                        <failOnNoGitDirectory>false</failOnNoGitDirectory>
+                        <failOnUnableToExtractRepoInfo>true</failOnUnableToExtractRepoInfo>
+                        <generateGitPropertiesFile>true</generateGitPropertiesFile>
+                        <!--generateGitPropertiesFilename>${project.build.outputDirectory}/git.properties</generateGitPropertiesFilename-->
+                        <generateGitPropertiesFilename>src/main/resources/git.properties</generateGitPropertiesFilename>
+                        <injectAllReactorProjects>true</injectAllReactorProjects>
+                        <prefix>git</prefix>
+                        <skip>${git-commit-id.skip}</skip>
+                        <skipPoms>false</skipPoms>
+                        <verbose>false</verbose>
+                    </configuration>
+                </plugin>
             </plugins>
             <!-- @formatter:on -->
         </pluginManagement>
@@ -129,8 +155,37 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.8</version>
+                <executions>
+                    <execution>
+                        <id>echo-git-info</id>
+                        <phase>process-resources</phase>
+                        <goals><goal>run</goal></goals>
+                        <configuration>
+                            <target>
+                                <echo>java version is ${java.version}</echo>
+                            </target>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>git-commit-id</id>
+            <!-- works on both git submodule and normal local repository -->
+            <activation><file><exists>${maven.multiModuleProjectDirectory}/.git</exists></file><activeByDefault>false</activeByDefault></activation>
+            <build>
+                <plugins>
+                    <plugin><groupId>pl.project13.maven</groupId><artifactId>git-commit-id-plugin</artifactId></plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
     <distributionManagement>
         <repository>

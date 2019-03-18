@@ -20,7 +20,6 @@
         <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
         <maven.compiler.showDeprecation>true</maven.compiler.showDeprecation>
         <maven.compiler.showWarnings>true</maven.compiler.showWarnings>
-        <maven.compiler.showWarnings>true</maven.compiler.showWarnings>
         <maven.javadoc.failsOnError>false</maven.javadoc.failsOnError>
         <maven.javadoc.skip>false</maven.javadoc.skip>
         <maven.source.skip>false</maven.source.skip>
@@ -163,7 +162,7 @@
                 <version>1.8</version>
                 <executions>
                     <execution>
-                        <id>echo-git-info</id>
+                        <id>echo-jdk-version</id>
                         <phase>process-resources</phase>
                         <goals><goal>run</goal></goals>
                         <configuration>
@@ -188,17 +187,6 @@
                 </plugins>
             </build>
         </profile>
-        <profile>
-            <id>disable-lombok</id>
-            <activation><activeByDefault>true</activeByDefault></activation>
-        </profile>
-        <!--<profile>-->
-            <!--<id>need-lombok</id>-->
-            <!--<activation><property><name>!need-lombok</name></property><activeByDefault>false</activeByDefault></activation>-->
-            <!--<dependencies>-->
-                <!--<dependency><groupId>org.projectlombok</groupId><artifactId>lombok</artifactId><version>${lombok.version}</version></dependency>-->
-            <!--</dependencies>-->
-        <!--</profile>-->
     </profiles>
 
     <distributionManagement>
@@ -216,7 +204,14 @@
 
     <!-- @formatter:off -->
     <dependencyManagement>
+        <dependencies>
+            <dependency><groupId>org.projectlombok</groupId><artifactId>lombok</artifactId><version>${lombok.version}</version></dependency>
+        </dependencies>
     </dependencyManagement>
-    <!-- @formatter:on -->
 
+    <!-- @formatter:off -->
+    <dependencies>
+        <dependency><groupId>org.projectlombok</groupId><artifactId>lombok</artifactId></dependency>
+    </dependencies>
+    <!-- @formatter:on -->
 </project>
